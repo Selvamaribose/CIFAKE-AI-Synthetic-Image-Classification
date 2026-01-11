@@ -1,5 +1,3 @@
-![Banner](./banneraiimg.jpg)
-
 # AI Image Classifier
 
 AI Image Classifier is a machine learning model that can effectively classify Real and AI Generated Images.
