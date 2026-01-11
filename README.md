@@ -40,7 +40,7 @@ Open Git Bash and change the directory to the location where the repository is t
   git init
 ```
 ```shell
-  git clone https://github.com/SanKolisetty/AI-Image-Classifier.git
+  git clone https://github.com/Selvamaribose/CIFAKE-AI-Synthetic-Image-Classification.git
 ```
 Now, install the requirements using the following command.
 
