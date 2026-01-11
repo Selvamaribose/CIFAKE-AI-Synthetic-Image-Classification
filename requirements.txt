@@ -1,0 +1,9 @@
+streamlit
+tensorflow==2.16.1
+keras==3.0.5
+pillow
+numpy>=1.26.0,<2.0
+matplotlib
+lime
+opencv-python-headless
+scikit-image
