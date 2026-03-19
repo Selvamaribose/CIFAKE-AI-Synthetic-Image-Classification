@@ -45,6 +45,8 @@ Open Git Bash and change the directory to the location where the repository is t
 Now, install the requirements using the following command.
 
 ```shell
+   python -m venv .venv
+   .\.venv\Scripts\Activate.ps1
    pip install -r requirements.txt 
 ```
 To access or use the application, open a terminal in the cloned repository folder and run the following command.
