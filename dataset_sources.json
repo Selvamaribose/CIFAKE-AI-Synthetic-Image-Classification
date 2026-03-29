@@ -1,0 +1,24 @@
+{
+  "sources": [
+    {
+      "name": "birdy654_cifake_real_and_ai_generated_synthetic_images",
+      "kaggle_id": "birdy654/cifake-real-and-ai-generated-synthetic-images"
+    },
+    {
+      "name": "cashbowman_ai_generated_images_vs_real_images",
+      "kaggle_id": "cashbowman/ai-generated-images-vs-real-images"
+    },
+    {
+      "name": "swati6945_ai_generated_vs_real_images",
+      "kaggle_id": "swati6945/ai-generated-vs-real-images"
+    },
+    {
+      "name": "sonalraj1234_ai_vs_real_images",
+      "kaggle_id": "sonalraj1234/ai-vs-real-images"
+    },
+    {
+      "name": "muhammadsaoodsarwar_ai_vs_real_192_class_scene_image_dataset",
+      "kaggle_id": "muhammadsaoodsarwar/ai-vs-real-192-class-scene-image-dataset"
+    }
+  ]
+}

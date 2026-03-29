@@ -1,92 +1,264 @@
 # AI Image Classifier
 
-AI Image Classifier is a machine learning model that can effectively classify Real and AI Generated Images.
+This project is a Streamlit app for classifying images as `Real` or `AI Generated`.
+It also includes:
 
-# Table of Contents
+- a reusable training pipeline
+- optional Kaggle dataset download + manifest generation
+- a saved model weights file for inference
+- a desktop wrapper that opens the app in its own native window on macOS and Windows
+- confidence breakdown and visual explanation in the app
 
-- [AI Image Classifier](#ai-image-classifier)
-- [Table of Contents](#table-of-contents)
-- [Brief Overview](#brief-overview)
-- [Demo](#demo)
-- [Installation](#installation)
-- [Data Sources](#data-sources)
-- [Model](#model)
-- [Testing and Evaluation](#testing-and-evaluation)
-- [Deployment](#deployment)
+## Repository Contents
 
-# Brief Overview
-[(Back to top)](#table-of-contents)
+- `deploy.py`: Streamlit application
+- `train_model.py`: model training script
+- `prepare_datasets.py`: Kaggle dataset downloader and manifest builder
+- `model_utils.py`: shared model configuration
+- `desktop_app.py`: native desktop wrapper for the Streamlit UI
+- `AIGeneratedModel.weights.h5`: trained inference weights
+- `training_metrics.json`: latest saved training/evaluation summary
 
-This project involved building a machine learning model that can classify real and AI generated images. The first step was to create a dataset comprising of AI-generated and real images. To accomplish this, `pygoogle_image` was used, with which images from Google were downloaded. Apart from Google Images, two more datasets were used.
+## Quick Start
 
-- CIFAKE: Real and AI-Generated Synthetic Images 
-- Ai Generated Images | Images Created using Ai from Kaggle
+If `AIGeneratedModel.weights.h5` is already in the repository, you do not need to train anything.
 
-These images were preprocessed and features were extracted. Then, a Convolutional Nueral Network based Classifier model was constructed and trained on the dataset containing around 1,00,000 images.
+### macOS / Linux
 
-# Demo
-[(Back to top)](#table-of-contents)
+```zsh
+git clone https://github.com/Selvamaribose/CIFAKE-AI-Synthetic-Image-Classification.git
+cd CIFAKE-AI-Synthetic-Image-Classification
 
-Here is a short demo of the deployed web application.
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 
-https://github.com/SanKolisetty/AI-Image-Classifier/assets/95172001/0ebe3ffb-4afe-4a7b-96d3-80ce5e7ce99f
-
-# Installation
-[(Back to top)](#table-of-contents)
-
-Open Git Bash and change the directory to the location where the repository is to be cloned. Then, type the following commands.
-
-```shell
-  git init
+streamlit run deploy.py
 ```
-```shell
-  git clone https://github.com/Selvamaribose/CIFAKE-AI-Synthetic-Image-Classification.git
+
+If `streamlit` is not found, use:
+
+```zsh
+python3 -m streamlit run deploy.py
 ```
-Now, install the requirements using the following command.
 
-```shell
-   python -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   pip install -r requirements.txt 
+### Windows PowerShell
+
+```powershell
+git clone https://github.com/Selvamaribose/CIFAKE-AI-Synthetic-Image-Classification.git
+cd CIFAKE-AI-Synthetic-Image-Classification
+
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+streamlit run deploy.py
 ```
-To access or use the application, open a terminal in the cloned repository folder and run the following command.
 
-```shell
-  streamlit run deploy.py
+## When Training Is Needed
+
+You only need to run training if:
+
+- the repository does not include `AIGeneratedModel.weights.h5`
+- you added new datasets
+- you changed the training code
+- you want a better model
+
+Training is slow and is not required every time you start the app.
+
+## Retraining Workflow
+
+### 1. Activate the virtual environment
+
+macOS / Linux:
+
+```zsh
+source .venv/bin/activate
 ```
-Finally, browse the link provided in your browser.
 
-# Data Sources
-[(Back to top)](#table-of-contents)
+Windows PowerShell:
 
-The dataset comprised of Real and AI Generated Images. Images were collected from Google using the python library `pygoogle_image`. Every single image was verified to avoid issues such as incorrect and ambigous images. Two other datsets were also used.
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
 
-- CIFAKE: Real and AI-Generated Synthetic Images ( [Link](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images) )
-- Ai Generated Images | Images Created using AI ( [Link](https://www.kaggle.com/datasets/anasmahmood000/ai-generated-images) )
+### 2. Download datasets once
 
-Combing the three datasets, we have:
+This step is only needed once per machine unless you delete the downloaded datasets.
 
-- Train Set: 101031
-- Test Set: 20000
+```zsh
+python3 prepare_datasets.py --download --build-manifest --continue-on-error --sources \
+  birdy654_cifake_real_and_ai_generated_synthetic_images \
+  cashbowman_ai_generated_images_vs_real_images \
+  swati6945_ai_generated_vs_real_images
+```
 
-# Model
-[(Back to top)](#table-of-contents)
+This creates:
 
-The CNN model was built similar to `VGG16` and was trained on the train dataset. The model has a `Convolutional` Layer, `MaxPooling` Layer and a `Dropout` Layer repeated four times with increasing sizes of filters of the Convolutional Layer i.e. 32, 64, 128, and 256. It has 3 dense layers. The activation for all the layers is `relu` except for the last layer, which has activation `sigmoid`. 
+- `datasets/source_index.json`
+- `datasets/dataset_manifest.json`
 
-> The model architecture and model summary are uploaded.
+### 3. Train the model
 
-# Testing and Evaluation
-[(Back to top)](#table-of-contents)
+```zsh
+python3 train_model.py --manifest datasets/dataset_manifest.json
+```
 
-On evaluation, model achieved an accuracy of 93.90% 
+This updates:
 
-Classification Report:
+- `AIGeneratedModel.weights.h5`
+- `AIGeneratedModel.keras`
+- `training_metrics.json`
 
-![image](https://github.com/SanKolisetty/AI-Image-Classifier/assets/95172001/e3e898a4-e43a-43fe-9f32-4e3d3aad2329)
+### 4. Run the app
 
-Confusion Matrix:
+```zsh
+streamlit run deploy.py
+```
 
-![image](https://github.com/SanKolisetty/AI-Image-Classifier/assets/95172001/846b99e3-7dc7-4fcb-980c-890d380eae3b)
+### 5. Open it like an app
 
-> 0 is Real and 1 is AI Generated
+For the easiest Finder/File Explorer launch, open the `Quick Start` folder in the repo root.
+
+macOS:
+
+```zsh
+chmod +x launchers/*.sh launchers/*.command
+./launchers/build_nebula_lens_app.sh
+```
+
+This builds `Nebula Lens.app` in the project root.
+
+How to open it on Mac:
+
+1. Open the `Quick Start` folder
+2. Double-click `Nebula Lens.app`
+3. Nebula Lens starts a local Streamlit server and opens it inside its own desktop window
+4. Closing the Nebula Lens window normally also stops the local server
+
+You can also open it from the repo root:
+
+- `Nebula Lens.app`
+- `launchers/Launch Nebula Lens.command`
+- `launchers/Stop Nebula Lens.command`
+
+Windows:
+
+How to open it on Windows:
+
+1. Open the `Quick Start` folder
+2. Double-click `Open Nebula Lens.bat`
+3. Nebula Lens starts a local Streamlit server and opens it inside its own desktop window
+4. Closing the Nebula Lens window normally also stops the local server
+
+Or run it from Command Prompt:
+
+```bat
+launchers\Launch Nebula Lens.bat
+```
+
+To stop it cleanly later:
+
+- macOS: double-click `Quick Start/Stop Nebula Lens.command`
+- Windows: double-click `Quick Start/Stop Nebula Lens.bat`
+
+Or run:
+
+```zsh
+launchers/Stop\ Nebula\ Lens.command
+```
+
+```bat
+launchers\Stop Nebula Lens.bat
+```
+
+## Important Notes
+
+- The app loads `AIGeneratedModel.weights.h5` first.
+- If you commit `AIGeneratedModel.weights.h5` and `training_metrics.json`, another system can run the app without retraining.
+- `prepare_datasets.py --download ...` downloads datasets only once in normal use.
+- `train_model.py` takes time because it performs real training. Do not run it unless you want a new model.
+
+## Data Sources
+
+The current dataset workflow supports source-aware training and evaluation. The repo is configured for these Kaggle datasets:
+
+- CIFAKE: Real and AI-Generated Synthetic Images
+- cashbowman/ai-generated-images-vs-real-images
+- swati6945/ai-generated-vs-real-images
+- sonalraj1234/ai-vs-real-images
+- muhammadsaoodsarwar/ai-vs-real-192-class-scene-image-dataset
+
+Recommended starter set:
+
+- `birdy654_cifake_real_and_ai_generated_synthetic_images`
+- `cashbowman_ai_generated_images_vs_real_images`
+- `swati6945_ai_generated_vs_real_images`
+
+## Current App Behavior
+
+- Accepts common image formats including `jpg`, `jpeg`, `png`, `bmp`, and `webp`
+- Shows Real vs AI classification
+- Shows score breakdown
+- Shows a visual explanation heatmap
+- Uses a saved training threshold from `training_metrics.json`
+
+## Troubleshooting
+
+### The Mac app or Windows launcher does not open
+
+Make sure the desktop dependencies were installed:
+
+```zsh
+pip install -r requirements.txt
+```
+
+The native window uses `pywebview`, so the desktop entrypoints need that package in `.venv`.
+
+### `python: command not found` on macOS
+
+Use `python3`, not `python`.
+
+```zsh
+python3 -m venv .venv
+```
+
+### `streamlit: command not found`
+
+Run Streamlit through Python:
+
+```zsh
+python3 -m streamlit run deploy.py
+```
+
+### The desktop window hangs or stays in the background
+
+Use the stop launcher once, then reopen the app:
+
+- macOS: `Quick Start/Stop Nebula Lens.command`
+- Windows: `Quick Start/Stop Nebula Lens.bat`
+
+### Kaggle download timeout
+
+Start with the smaller subset shown above instead of downloading every configured dataset at once.
+
+### The app misclassifies some real portrait images
+
+That usually means the training data needs better balance, especially more real human portraits matched against AI-generated portraits. Retrain after improving the dataset mix.
+
+## Model Files
+
+- `AIGeneratedModel.weights.h5`: inference weights used by the app
+- `AIGeneratedModel.keras`: best saved Keras checkpoint from training
+- `AIGeneratedModel.h5`: legacy model file kept for backward compatibility
+
+## Evaluation
+
+The latest evaluation summary is saved in `training_metrics.json`.
+Check that file for:
+
+- dataset counts
+- split counts
+- source-wise metrics
+- decision threshold
+- latest test metrics

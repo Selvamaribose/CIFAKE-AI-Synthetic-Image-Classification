@@ -7,3 +7,11 @@ matplotlib
 lime
 opencv-python-headless
 scikit-image
+kagglehub
+pywebview>=5.1
+pyobjc-core<12; sys_platform == "darwin"
+pyobjc-framework-cocoa<12; sys_platform == "darwin"
+pyobjc-framework-quartz<12; sys_platform == "darwin"
+pyobjc-framework-security<12; sys_platform == "darwin"
+pyobjc-framework-uniformtypeidentifiers<12; sys_platform == "darwin"
+pyobjc-framework-webkit<12; sys_platform == "darwin"
