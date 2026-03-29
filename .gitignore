@@ -29,7 +29,7 @@ Thumbs.db
 .nebula_lens_streamlit.log
 .nebula_lens.pid
 .nebula_lens_streamlit.pid
-Nebula Lens.app/
+# Nebula Lens.app/
 
 # Jupyter
 .ipynb_checkpoints/
