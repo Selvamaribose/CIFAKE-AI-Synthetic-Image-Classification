@@ -982,7 +982,7 @@ if img and analyze_clicked:
     test = np.array([img_array])
     
     # Run prediction first to build the model
-    y = model.predict(test)
+    y = model.predict(test, verbose=0)
     confidence = float(y[0][0])
     final_decision = get_final_decision(confidence, decision_bounds, face_count)
     raw_ai_score = format_percent(confidence)
