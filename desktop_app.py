@@ -23,6 +23,7 @@ URL = f"http://127.0.0.1:{PORT}"
 LOG_FILE = ROOT_DIR / ".nebula_lens_streamlit.log"
 DESKTOP_PID_FILE = ROOT_DIR / ".nebula_lens.pid"
 STREAMLIT_PID_FILE = ROOT_DIR / ".nebula_lens_streamlit.pid"
+ICON_FILE = ROOT_DIR / "app_icon" / "Nebula-Icon.png"
 
 
 def escape_applescript(message: str) -> str:
@@ -247,15 +248,50 @@ class DesktopApp:
             min_size=WINDOW_MIN_SIZE,
             background_color="#08101f",
             text_select=True,
+            focus=True,
         )
         window.events.closed += self.on_window_closed
 
         try:
-            webview.start()
+            webview.start(
+                self.on_webview_ready,
+                args=(window,),
+                gui="cocoa" if sys.platform == "darwin" else None,
+                icon=str(ICON_FILE) if ICON_FILE.exists() else None,
+            )
         finally:
             self.cleanup()
 
         return 0
+
+    def on_webview_ready(self, window: object) -> None:
+        self.activate_native_window(window)
+
+    def activate_native_window(self, window: object) -> None:
+        if sys.platform == "darwin":
+            try:
+                from AppKit import (
+                    NSApplication,
+                    NSApplicationActivateIgnoringOtherApps,
+                    NSApplicationActivationPolicyRegular,
+                    NSRunningApplication,
+                )
+
+                app = NSApplication.sharedApplication()
+                app.setActivationPolicy_(NSApplicationActivationPolicyRegular)
+                NSRunningApplication.currentApplication().activateWithOptions_(
+                    NSApplicationActivateIgnoringOtherApps
+                )
+            except Exception:
+                pass
+
+        for method_name in ("restore", "show"):
+            method = getattr(window, method_name, None)
+            if callable(method):
+                try:
+                    method()
+                except Exception:
+                    pass
 
 
 def main() -> int:
