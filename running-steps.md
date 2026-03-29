@@ -1,127 +1,90 @@
-# AI Image Classifier - Setup Guide
+# Nebula Lens Setup Guide
 
-## Prerequisites
-- Python 3.12 (compatible version)
-- Git
+## Quick Setup
 
-## Installation Steps
+### macOS
 
-### For Windows (Command Prompt)
+```zsh
+git clone https://github.com/Selvamaribose/CIFAKE-AI-Synthetic-Image-Classification.git
+cd CIFAKE-AI-Synthetic-Image-Classification
 
-#### 1. Clone the Repository
-cmd
-git init
-git clone https://github.com/SanKolisetty/AI-Image-Classifier.git
-cd AI-Image-Classifier
-
-
-#### 2. Install Compatible Python Version
-- Download Python 3.12 from [python.org](https://www.python.org/downloads/)
-- Install and make sure to check "Add Python to PATH"
-
-#### 3. Create Virtual Environment
-cmd
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-venv\Scripts\activate
-
-
-#### 4. Install Dependencies
-cmd
-# Install all required packages
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
+chmod +x launchers/*.sh launchers/*.command
+./launchers/build_nebula_lens_app.sh
+```
 
-# Fix numpy compatibility if needed
-pip install "numpy>=1.26.0,<2.0" --force-reinstall
+Then open:
 
+- `Nebula Lens.app` from the repo root, or
+- `Quick Start/Nebula Lens.app`
 
-#### 5. Run the Application
-cmd
-# Start the Streamlit app
-streamlit run deploy.py
+### Windows
 
+```bat
+git clone https://github.com/Selvamaribose/CIFAKE-AI-Synthetic-Image-Classification.git
+cd CIFAKE-AI-Synthetic-Image-Classification
 
-### For macOS/Linux (Terminal)
-
-#### 1. Clone the Repository
-bash
-git init
-git clone https://github.com/SanKolisetty/AI-Image-Classifier.git
-cd AI-Image-Classifier
-
-
-#### 2. Install Compatible Python Version
-bash
-# macOS with Homebrew
-brew install python@3.12
-
-# Linux (Ubuntu/Debian)
-sudo apt update
-sudo apt install python3.12 python3.12-venv
-
-
-#### 3. Create Virtual Environment
-bash
-# Create virtual environment
-python3.12 -m venv venv
-
-# Activate virtual environment
-source venv/bin/activate
-
-
-#### 4. Install Dependencies
-bash
-# Install all required packages
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+```
 
-# Fix numpy compatibility if needed
-pip install "numpy>=1.26.0,<2.0" --force-reinstall
+Then open:
 
+- `Quick Start\Open Nebula Lens.bat`
 
-#### 5. Run the Application
-bash
-# Start the Streamlit app
+## What Opens
 
-## Features
-- *AI vs Real Classification* - Determines if an image is AI-generated or real
-- *Confidence Scores* - Shows probability percentages
-- *Content Recognition* - Identifies objects in the image
-- *GradCAM Visualization* - Shows which areas the model focuses on
-- *Detailed Analysis* - Image features and model explanations
+- The desktop wrapper lives in `desktop_app.py`
+- It starts the local Streamlit server on `127.0.0.1:8501`
+- It opens the UI inside a native desktop window by using `pywebview`
+- Closing the desktop window normally also stops the local server
 
-## Troubleshooting
+## If The App Hangs
 
-### If you get numpy errors:
-bash
-pip install "numpy>=1.26.0,<2.0" --force-reinstall
+Use the stop launcher once, then reopen:
 
+- macOS: `Quick Start/Stop Nebula Lens.command`
+- Windows: `Quick Start/Stop Nebula Lens.bat`
 
-### If TensorFlow fails to install:
-bash
-# Make sure you're using Python 3.12
-python --version
-# Should show Python 3.12.x
+## Browser Fallback
 
+If you want the old browser flow for debugging, you can still run:
 
-### If the app won't start:
-bash
-# Make sure virtual environment is activated
-source venv/bin/activate
-# Then run the app
-streamlit run deploy.py
+```zsh
+source .venv/bin/activate
+python3 -m streamlit run deploy.py
+```
 
+## Retraining
 
-## Model Files
-- Ensure AIGeneratedModel.h5 is in the project directory
-- The app will warn if model weights can't be loaded
+Only retrain when you actually want a new model.
 
-## Usage
-1. Upload an image (PNG, JPG, JPEG)
-2. Click "Check" button
-3. View results:
-   - Classification (Real/AI Generated)
-   - Confidence percentage
-   - Image content description
-   - Visual explanation heatmap
+### Download datasets once
+
+```zsh
+python3 prepare_datasets.py --download --build-manifest --continue-on-error --sources \
+  birdy654_cifake_real_and_ai_generated_synthetic_images \
+  cashbowman_ai_generated_images_vs_real_images \
+  swati6945_ai_generated_vs_real_images
+```
+
+### Rebuild the manifest later without redownloading
+
+```zsh
+python3 prepare_datasets.py --build-manifest --continue-on-error
+```
+
+### Train
+
+```zsh
+python3 train_model.py --manifest datasets/dataset_manifest.json
+```
+
+## Notes
+
+- `AIGeneratedModel.weights.h5` is the inference file used by the app
+- `training_metrics.json` stores the latest evaluation summary
+- `prepare_datasets.py` downloads datasets only once in normal use

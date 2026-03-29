@@ -1,0 +1,361 @@
+{
+  "image_size": 160,
+  "weights": "imagenet",
+  "data_source": "/Users/Pavithra.Bose/Documents/Python/CIFAKE-AI-Synthetic-Image-Classification/datasets/dataset_manifest.json",
+  "class_counts": {
+    "real": 60936,
+    "ai_generated": 61075
+  },
+  "source_counts": {
+    "birdy654_cifake_real_and_ai_generated_synthetic_images": {
+      "real": 60000,
+      "ai_generated": 60000
+    },
+    "cashbowman_ai_generated_images_vs_real_images": {
+      "real": 434,
+      "ai_generated": 539
+    },
+    "swati6945_ai_generated_vs_real_images": {
+      "real": 502,
+      "ai_generated": 536
+    }
+  },
+  "split_counts": {
+    "train": {
+      "real": 42654,
+      "ai_generated": 42752
+    },
+    "val": {
+      "real": 9140,
+      "ai_generated": 9160
+    },
+    "test": {
+      "real": 9142,
+      "ai_generated": 9163
+    }
+  },
+  "effective_train_counts": {
+    "real": 3636,
+    "ai_generated": 3636
+  },
+  "split_source_counts": {
+    "train": {
+      "birdy654_cifake_real_and_ai_generated_synthetic_images": {
+        "real": 42000,
+        "ai_generated": 42000
+      },
+      "cashbowman_ai_generated_images_vs_real_images": {
+        "real": 303,
+        "ai_generated": 377
+      },
+      "swati6945_ai_generated_vs_real_images": {
+        "real": 351,
+        "ai_generated": 375
+      }
+    },
+    "val": {
+      "birdy654_cifake_real_and_ai_generated_synthetic_images": {
+        "real": 9000,
+        "ai_generated": 9000
+      },
+      "cashbowman_ai_generated_images_vs_real_images": {
+        "real": 65,
+        "ai_generated": 80
+      },
+      "swati6945_ai_generated_vs_real_images": {
+        "real": 75,
+        "ai_generated": 80
+      }
+    },
+    "test": {
+      "birdy654_cifake_real_and_ai_generated_synthetic_images": {
+        "real": 9000,
+        "ai_generated": 9000
+      },
+      "cashbowman_ai_generated_images_vs_real_images": {
+        "real": 66,
+        "ai_generated": 82
+      },
+      "swati6945_ai_generated_vs_real_images": {
+        "real": 76,
+        "ai_generated": 81
+      }
+    }
+  },
+  "effective_train_source_counts": {
+    "birdy654_cifake_real_and_ai_generated_synthetic_images": {
+      "real": 1212,
+      "ai_generated": 1212
+    },
+    "cashbowman_ai_generated_images_vs_real_images": {
+      "real": 1212,
+      "ai_generated": 1212
+    },
+    "swati6945_ai_generated_vs_real_images": {
+      "real": 1212,
+      "ai_generated": 1212
+    }
+  },
+  "train_sampling": {
+    "mode": "source_class",
+    "target_per_group": 1212,
+    "sample_count_before": 85406,
+    "sample_count_after": 7272,
+    "group_counts_before": {
+      "birdy654_cifake_real_and_ai_generated_synthetic_images::ai_generated": 42000,
+      "birdy654_cifake_real_and_ai_generated_synthetic_images::real": 42000,
+      "cashbowman_ai_generated_images_vs_real_images::ai_generated": 377,
+      "cashbowman_ai_generated_images_vs_real_images::real": 303,
+      "swati6945_ai_generated_vs_real_images::ai_generated": 375,
+      "swati6945_ai_generated_vs_real_images::real": 351
+    },
+    "group_counts_after": {
+      "birdy654_cifake_real_and_ai_generated_synthetic_images::ai_generated": 1212,
+      "birdy654_cifake_real_and_ai_generated_synthetic_images::real": 1212,
+      "cashbowman_ai_generated_images_vs_real_images::ai_generated": 1212,
+      "cashbowman_ai_generated_images_vs_real_images::real": 1212,
+      "swati6945_ai_generated_vs_real_images::ai_generated": 1212,
+      "swati6945_ai_generated_vs_real_images::real": 1212
+    }
+  },
+  "history": {
+    "accuracy": [
+      0.6696919798851013,
+      0.7527502775192261,
+      0.7680143117904663,
+      0.7769526839256287,
+      0.7861661314964294,
+      0.7890539169311523,
+      0.7440869212150574,
+      0.7979922890663147,
+      0.8283828496932983,
+      0.8439218997955322
+    ],
+    "auc": [
+      0.7311356067657471,
+      0.8291951417922974,
+      0.846250593662262,
+      0.8574943542480469,
+      0.8688914179801941,
+      0.8698051571846008,
+      0.8297077417373657,
+      0.879871666431427,
+      0.9084916710853577,
+      0.9201201796531677
+    ],
+    "loss": [
+      0.6246520280838013,
+      0.5088823437690735,
+      0.48533034324645996,
+      0.47156664729118347,
+      0.4527016580104828,
+      0.45180943608283997,
+      0.5100918412208557,
+      0.4347634017467499,
+      0.38380226492881775,
+      0.36092790961265564
+    ],
+    "precision": [
+      0.6683952212333679,
+      0.7534473538398743,
+      0.7689759731292725,
+      0.7772576808929443,
+      0.7860874533653259,
+      0.7881030440330505,
+      0.7438856959342957,
+      0.7945093512535095,
+      0.830199122428894,
+      0.8410144448280334
+    ],
+    "recall": [
+      0.6735423803329468,
+      0.751375138759613,
+      0.7662266492843628,
+      0.7764026522636414,
+      0.7863036394119263,
+      0.790704071521759,
+      0.7444994449615479,
+      0.8039053678512573,
+      0.8256325721740723,
+      0.8481848239898682
+    ],
+    "val_accuracy": [
+      0.7373770475387573,
+      0.7561202049255371,
+      0.7496721148490906,
+      0.764153003692627,
+      0.769562840461731,
+      0.7614753842353821,
+      0.7939890623092651,
+      0.7981420755386353,
+      0.8071584701538086,
+      0.8107650279998779
+    ],
+    "val_auc": [
+      0.8190164566040039,
+      0.841080904006958,
+      0.8535189032554626,
+      0.8543412685394287,
+      0.8599750995635986,
+      0.8579678535461426,
+      0.881196141242981,
+      0.895045280456543,
+      0.9036528468132019,
+      0.9108219742774963
+    ],
+    "val_loss": [
+      0.5226611495018005,
+      0.4937305450439453,
+      0.4956640899181366,
+      0.4784109592437744,
+      0.4710817039012909,
+      0.48609811067581177,
+      0.43305498361587524,
+      0.4309561550617218,
+      0.41092127561569214,
+      0.4051581025123596
+    ],
+    "val_precision": [
+      0.7483459115028381,
+      0.7458904981613159,
+      0.8218754529953003,
+      0.7964504361152649,
+      0.803810715675354,
+      0.7137380838394165,
+      0.810841977596283,
+      0.8619867563247681,
+      0.8625885248184204,
+      0.8772348165512085
+    ],
+    "val_recall": [
+      0.7161571979522705,
+      0.7777292728424072,
+      0.6382095813751221,
+      0.710371196269989,
+      0.7138646245002747,
+      0.8740174770355225,
+      0.7674672603607178,
+      0.7104803323745728,
+      0.7312226891517639,
+      0.7231441140174866
+    ],
+    "learning_rate": [
+      0.0010000000474974513,
+      0.0010000000474974513,
+      0.0010000000474974513,
+      0.0010000000474974513,
+      0.0010000000474974513,
+      0.0010000000474974513,
+      9.999999747378752e-06,
+      9.999999747378752e-06,
+      9.999999747378752e-06,
+      9.999999747378752e-06
+    ]
+  },
+  "test_metrics": {
+    "accuracy": 0.8113083839416504,
+    "auc": 0.9089433550834656,
+    "loss": 0.40848708152770996,
+    "precision": 0.8767322301864624,
+    "recall": 0.724980890750885
+  },
+  "test_metrics_by_source": {
+    "birdy654_cifake_real_and_ai_generated_synthetic_images": {
+      "accuracy": 0.8119999766349792,
+      "auc": 0.9096542000770569,
+      "loss": 0.40684616565704346,
+      "precision": 0.8773179054260254,
+      "recall": 0.7254444360733032
+    },
+    "cashbowman_ai_generated_images_vs_real_images": {
+      "accuracy": 0.7094594836235046,
+      "auc": 0.8153178691864014,
+      "loss": 0.5859984755516052,
+      "precision": 0.8305084705352783,
+      "recall": 0.5975610017776489
+    },
+    "swati6945_ai_generated_vs_real_images": {
+      "accuracy": 0.8280254602432251,
+      "auc": 0.9182098507881165,
+      "loss": 0.3966359496116638,
+      "precision": 0.8552631735801697,
+      "recall": 0.8024691343307495
+    }
+  },
+  "decision_threshold": 0.2900000000000001,
+  "decision_threshold_selection": {
+    "threshold": 0.2900000000000001,
+    "accuracy": 0.8263934426229508,
+    "precision": 0.8039833350269282,
+    "recall": 0.8637554585152838,
+    "specificity": 0.7889496717724289,
+    "false_positive_rate": 0.2110503282275711,
+    "false_negative_rate": 0.13624454148471615,
+    "balanced_accuracy": 0.8263525651438564,
+    "true_positive": 7912,
+    "true_negative": 7211,
+    "false_positive": 1929,
+    "false_negative": 1248,
+    "macro_balanced_accuracy": 0.8145968660968661,
+    "macro_specificity": 0.7745270655270655,
+    "macro_recall": 0.8546666666666667
+  },
+  "test_threshold_metrics": {
+    "threshold": 0.2900000000000001,
+    "accuracy": 0.826276973504507,
+    "precision": 0.802446668688707,
+    "recall": 0.8662010258648914,
+    "specificity": 0.786261211988624,
+    "false_positive_rate": 0.21373878801137608,
+    "false_negative_rate": 0.13379897413510858,
+    "balanced_accuracy": 0.8262311189267577,
+    "true_positive": 7937,
+    "true_negative": 7188,
+    "false_positive": 1954,
+    "false_negative": 1226
+  },
+  "test_threshold_metrics_by_source": {
+    "birdy654_cifake_real_and_ai_generated_synthetic_images": {
+      "threshold": 0.2900000000000001,
+      "accuracy": 0.8268333333333333,
+      "precision": 0.8025300833076211,
+      "recall": 0.867,
+      "specificity": 0.7866666666666666,
+      "false_positive_rate": 0.21333333333333335,
+      "false_negative_rate": 0.133,
+      "balanced_accuracy": 0.8268333333333333,
+      "true_positive": 7803,
+      "true_negative": 7080,
+      "false_positive": 1920,
+      "false_negative": 1197
+    },
+    "cashbowman_ai_generated_images_vs_real_images": {
+      "threshold": 0.2900000000000001,
+      "accuracy": 0.7364864864864865,
+      "precision": 0.7529411764705882,
+      "recall": 0.7804878048780488,
+      "specificity": 0.6818181818181818,
+      "false_positive_rate": 0.3181818181818182,
+      "false_negative_rate": 0.21951219512195122,
+      "balanced_accuracy": 0.7311529933481153,
+      "true_positive": 64,
+      "true_negative": 45,
+      "false_positive": 21,
+      "false_negative": 18
+    },
+    "swati6945_ai_generated_vs_real_images": {
+      "threshold": 0.2900000000000001,
+      "accuracy": 0.8471337579617835,
+      "precision": 0.8433734939759037,
+      "recall": 0.8641975308641975,
+      "specificity": 0.8289473684210527,
+      "false_positive_rate": 0.17105263157894737,
+      "false_negative_rate": 0.13580246913580246,
+      "balanced_accuracy": 0.846572449642625,
+      "true_positive": 70,
+      "true_negative": 63,
+      "false_positive": 13,
+      "false_negative": 11
+    }
+  }
+}

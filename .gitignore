@@ -1,5 +1,5 @@
 # Model files
-*.h5
+*.keras
 *.pkl
 *.joblib
 
@@ -25,9 +25,16 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
+# Local launcher output
+.nebula_lens_streamlit.log
+.nebula_lens.pid
+.nebula_lens_streamlit.pid
+Nebula Lens.app/
+
 # Jupyter
 .ipynb_checkpoints/
 
 # Data
 *.csv
 *.xlsx
+datasets/
